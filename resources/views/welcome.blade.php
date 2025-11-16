@@ -22,7 +22,7 @@
         @livewire('led-control')
 
         <!-- Auth Links -->
-        @if (Route::has('login'))
+        {{-- @if (Route::has('login'))
             <div class="mt-8 text-center">
                 <nav class="flex items-center justify-center gap-4 text-sm">
                     @auth
@@ -44,7 +44,7 @@
                     @endauth
                 </nav>
             </div>
-        @endif
+        @endif --}}
     </div>
     @livewireScripts
 </body>
