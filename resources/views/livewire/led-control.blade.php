@@ -46,13 +46,13 @@
         </div>
 
         <!-- Info Box -->
-        {{-- <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+        <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <p class="text-xs text-blue-800 dark:text-blue-300">
                 <strong>ESP8266 Endpoint:</strong> /led/status
             </p>
             {{-- <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">
                 Polling every 2 seconds from your Arduino
-            </p> --}} 
+            </p> --}}
         </div>
     </div>
 </div>
