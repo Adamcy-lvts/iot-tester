@@ -50,9 +50,9 @@
             <p class="text-xs text-blue-800 dark:text-blue-300">
                 <strong>ESP8266 Endpoint:</strong> /led/status
             </p>
-            <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">
+            {{-- <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">
                 Polling every 2 seconds from your Arduino
-            </p>
+            </p> --}}
         </div>
     </div>
 </div>
