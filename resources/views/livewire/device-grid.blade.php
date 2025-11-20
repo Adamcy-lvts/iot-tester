@@ -26,7 +26,7 @@
     @endforeach
 
     <!-- API Information Box -->
-    <div class="mt-10 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+    {{-- <div class="mt-10 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
         <h4 class="text-lg font-semibold text-blue-900 dark:text-blue-300 mb-3">ESP8266 / Arduino Integration</h4>
 
         <div class="space-y-2 text-sm text-blue-800 dark:text-blue-300">
@@ -50,5 +50,5 @@
             <p>Poll interval: 2-3 seconds recommended</p>
             <p>JSON response format: <code>{"living_room_light": "1", "air_condition": "0", ...}</code></p>
         </div>
-    </div>
+    </div> --}}
 </div>
