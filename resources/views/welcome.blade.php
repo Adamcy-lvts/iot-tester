@@ -3,27 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IoT LED Controller</title>
+    <title>IoT Home Automation</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="bg-gray-50 dark:bg-zinc-900 min-h-screen flex items-center justify-center p-6">
-    <div class="w-full max-w-2xl">
+<body class="bg-gray-50 dark:bg-zinc-900 min-h-screen p-6">
+    <div class="w-full max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">IoT LED Controller</h1>
-            <p class="text-gray-600 dark:text-gray-400">Control your ESP8266 LED from anywhere</p>
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-bold text-gray-900 dark:text-white mb-3">IoT Home Automation</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Control all your devices from anywhere in the world</p>
         </div>
 
-        <!-- LED Control Component -->
-        @livewire('led-control')
+        <!-- Device Grid Component -->
+        @livewire('device-grid')
 
         <!-- Auth Links -->
         {{-- @if (Route::has('login'))
-            <div class="mt-8 text-center">
+            <div class="mt-10 text-center">
                 <nav class="flex items-center justify-center gap-4 text-sm">
                     @auth
                         <a href="{{ url('/dashboard') }}"

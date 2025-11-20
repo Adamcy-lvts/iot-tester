@@ -61,3 +61,32 @@ Route::get('/read_led.php', function () {
     return response($status, 200)
         ->header('Content-Type', 'text/plain');
 });
+
+// ========================================
+// Multi-Device API Endpoints
+// ========================================
+
+// Get all devices status as JSON (for ESP8266 with JSON parsing)
+Route::get('/api/devices/all', function () {
+    $devices = \App\Models\Device::orderBy('id')->get()->keyBy('token');
+
+    return response()->json([
+        'living_room_light' => $devices['living_room_light']->status ?? '0',
+        'air_condition' => $devices['air_condition']->status ?? '0',
+        'water_heater' => $devices['water_heater']->status ?? '0',
+        'borehole' => $devices['borehole']->status ?? '0',
+    ]);
+});
+
+// Get single device status by slug
+Route::get('/api/devices/{slug}/status', function (string $slug) {
+    $device = \App\Models\Device::where('slug', $slug)->first();
+    return response($device->status ?? '0', 200)->header('Content-Type', 'text/plain');
+});
+
+// Get device status by token (for testing)
+Route::get('/api/devices/poll', function () {
+    $token = request('token');
+    $device = \App\Models\Device::where('token', $token)->first();
+    return response($device->status ?? '0', 200)->header('Content-Type', 'text/plain');
+});
