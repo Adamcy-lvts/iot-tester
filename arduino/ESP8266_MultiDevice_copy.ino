@@ -1,5 +1,5 @@
 /*
- * ESP8266 Dynamic Relay Controller
+ * ESP8266 Direct Relay Controller
  *
  * This sketch polls the Laravel server for device statuses and directly controls
  * relays connected to the ESP8266 GPIO pins.
@@ -25,15 +25,28 @@ const char* password = "YOUR_WIFI_PASSWORD";
 const String serverUrl = "https://iot-test.online/api/devices/all";
 const unsigned long POLL_INTERVAL = 2000; // 2 seconds
 
+// Device Configuration Structure
+struct Device {
+  const char* jsonKey; // The key in the JSON response
+  int pin;             // The GPIO pin connected to the relay
+};
+
+// Define your devices and pins here
+// NOTE: Pin numbers are GPIO numbers (e.g., D1 on NodeMCU is usually GPIO 5)
+const int DEVICE_COUNT = 4;
+Device devices[DEVICE_COUNT] = {
+  { "living_room_light", 5 },  // GPIO 5 (D1)
+  { "air_condition",     4 },  // GPIO 4 (D2)
+  { "water_heater",      0 },  // GPIO 0 (D3)
+  { "borehole",          2 }   // GPIO 2 (D4)
+};
+
 // ==========================================
 // GLOBAL VARIABLES
 // ==========================================
 
 unsigned long lastPollTime = 0;
 String lastPayload = "";
-
-// Keep track of initialized pins to avoid calling pinMode repeatedly
-bool pinInitialized[17] = {false}; // ESP8266 has GPIOs up to 16
 
 // ==========================================
 // SETUP
@@ -44,8 +57,15 @@ void setup() {
   delay(100);
 
   Serial.println("\n\n=================================");
-  Serial.println("ESP8266 Dynamic Relay Controller");
+  Serial.println("ESP8266 Direct Relay Controller");
   Serial.println("=================================\n");
+
+  // Initialize Relay Pins
+  for (int i = 0; i < DEVICE_COUNT; i++) {
+    pinMode(devices[i].pin, OUTPUT);
+    // Default to OFF (Assuming Active HIGH relays, change to HIGH if Active LOW)
+    digitalWrite(devices[i].pin, LOW); 
+  }
 
   // Connect to WiFi
   connectWiFi();
@@ -116,8 +136,7 @@ void pollServer() {
 }
 
 void processJson(String payload) {
-  // Increase buffer size for array of objects
-  DynamicJsonDocument doc(2048);
+  StaticJsonDocument<512> doc;
   DeserializationError error = deserializeJson(doc, payload);
 
   if (error) {
@@ -128,35 +147,18 @@ void processJson(String payload) {
 
   Serial.println("\n--- Updating Devices ---");
 
-  // Iterate through the JSON array
-  JsonArray devices = doc.as<JsonArray>();
-  
-  for (JsonObject device : devices) {
-    const char* token = device["token"];
-    int pin = device["pin"];
-    String status = device["status"];
-
-    // Validate pin number
-    if (pin < 0 || pin > 16) continue;
-
-    // Initialize pin if not already done
-    if (!pinInitialized[pin]) {
-      pinMode(pin, OUTPUT);
-      pinInitialized[pin] = true;
-      Serial.print("Initialized Pin: ");
-      Serial.println(pin);
-    }
-
-    Serial.print(token);
-    Serial.print(" (Pin ");
-    Serial.print(pin);
-    Serial.print("): ");
-
+  for (int i = 0; i < DEVICE_COUNT; i++) {
+    // Get status from JSON using the key defined in our struct
+    String status = doc[devices[i].jsonKey].as<String>();
+    
+    Serial.print(devices[i].jsonKey);
+    Serial.print(": ");
+    
     if (status == "1") {
-      digitalWrite(pin, HIGH);
+      digitalWrite(devices[i].pin, HIGH);
       Serial.println("ON");
     } else {
-      digitalWrite(pin, LOW);
+      digitalWrite(devices[i].pin, LOW);
       Serial.println("OFF");
     }
   }

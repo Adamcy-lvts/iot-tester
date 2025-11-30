@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,10 +13,7 @@
 <body class="bg-gray-50 dark:bg-zinc-900 min-h-screen p-6">
     <div class="w-full max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-5xl font-bold text-gray-900 dark:text-white mb-3">IoT Home Automation</h1>
-            {{-- <p class="text-lg text-gray-600 dark:text-gray-400">Control all your devices from anywhere in the world</p> --}}
-        </div>
+
 
         <!-- Device Grid Component -->
         @livewire('device-grid')

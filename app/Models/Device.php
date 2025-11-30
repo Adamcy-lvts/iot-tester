@@ -15,6 +15,7 @@ class Device extends Model
         'status',
         'config',
         'token',
+        'gpio_pin',
         'mac_address',
         'description',
     ];

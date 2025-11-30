@@ -33,6 +33,7 @@ class DeviceSeeder extends Seeder
             'room_id' => $livingRoom->id,
             'status' => '0',
             'token' => 'living_room_light',
+            'gpio_pin' => 5,
             'description' => 'Main living room lighting',
         ]);
 
@@ -43,6 +44,7 @@ class DeviceSeeder extends Seeder
             'room_id' => $livingRoom->id,
             'status' => '0',
             'token' => 'air_condition',
+            'gpio_pin' => 4,
             'description' => 'Living room air conditioning unit',
         ]);
 
@@ -53,6 +55,7 @@ class DeviceSeeder extends Seeder
             'room_id' => $utilityRoom->id,
             'status' => '0',
             'token' => 'water_heater',
+            'gpio_pin' => 0,
             'description' => 'Main water heating system',
         ]);
 
@@ -63,6 +66,7 @@ class DeviceSeeder extends Seeder
             'room_id' => $utilityRoom->id,
             'status' => '0',
             'token' => 'borehole',
+            'gpio_pin' => 2,
             'description' => 'Water borehole pump',
         ]);
     }

@@ -68,14 +68,15 @@ Route::get('/read_led.php', function () {
 
 // Get all devices status as JSON (for ESP8266 with JSON parsing)
 Route::get('/api/devices/all', function () {
-    $devices = \App\Models\Device::orderBy('id')->get()->keyBy('token');
+    $devices = \App\Models\Device::all()->map(function ($device) {
+        return [
+            'token' => $device->token,
+            'pin' => $device->gpio_pin,
+            'status' => $device->status,
+        ];
+    });
 
-    return response()->json([
-        'living_room_light' => $devices['living_room_light']->status ?? '0',
-        'air_condition' => $devices['air_condition']->status ?? '0',
-        'water_heater' => $devices['water_heater']->status ?? '0',
-        'borehole' => $devices['borehole']->status ?? '0',
-    ]);
+    return response()->json($devices);
 });
 
 // Get single device status by slug
