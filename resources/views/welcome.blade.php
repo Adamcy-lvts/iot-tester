@@ -18,30 +18,7 @@
         <!-- Device Grid Component -->
         @livewire('device-grid')
 
-        <!-- Auth Links -->
-        {{-- @if (Route::has('login'))
-            <div class="mt-10 text-center">
-                <nav class="flex items-center justify-center gap-4 text-sm">
-                    @auth
-                        <a href="{{ url('/dashboard') }}"
-                           class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                           class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">
-                            Log in
-                        </a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                               class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            </div>
-        @endif --}}
+       
     </div>
     @livewireScripts
 </body>

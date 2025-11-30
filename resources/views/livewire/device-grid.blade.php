@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full" wire:poll.2s>
 
 
     <!-- Unified Remote Grid -->
